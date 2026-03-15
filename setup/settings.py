@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-#Informa o diretorio para que o django mexa com todos os arquivos estaticos
+#Informa o diretorio para o projeto estatico
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'setup/static')
 ]
