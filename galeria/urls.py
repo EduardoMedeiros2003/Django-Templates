@@ -1,7 +1,8 @@
 # Aqui vai todas as rotas de galeria deste app
 from django.urls import path
-from galeria.views import index
+from galeria.views import index, imagem
 
 urlpatterns = [
-    path('', index)
+    path('', index, name= 'index'),
+    path('imagem/', imagem, name='imagem')
 ]
