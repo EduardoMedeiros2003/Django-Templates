@@ -23,4 +23,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('galeria.urls')),#rota na raiz, ai essa rota vai ser execultado 
+    path('', include('usuarios.urls')),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
