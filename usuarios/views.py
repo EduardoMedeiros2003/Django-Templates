@@ -1,12 +1,48 @@
 from django.shortcuts import render, redirect
 from usuarios.forms import LoginForms, CadastroForms
 from django.contrib.auth.models import User
+from django.contrib import auth
 # Cada app precisa de um diretorio na em templates
 
+"""
+1 - verificamos se a requisição é do tipo POST (envio do formulário);
+2 - validamos os dados utilizando o Django Forms;
+3 - capturamos os dados do formulário (nome e senha);
+4 - utilizamos o authenticate para verificar se o usuário existe e se a senha está correta;
+5 - caso o usuário seja válido, realizamos o login com auth.login;
+6 - redirecionamos o usuário para a página inicial após login;
+7 - caso falhe, redirecionamos de volta para a tela de login.
+"""
 def login(request):
     form = LoginForms()
+
+    if request.method == 'POST':
+        form = LoginForms(request.POST)
+        if form.is_valid():
+            nome=form['nome_login'].value()
+            senha=form['senha'].value()
+
+        usuario = auth.authenticate(
+            request,
+            username=nome,
+            password=senha,
+        )
+    if usuario is not None:
+        auth.login(request, usuario)
+        return redirect('index')
+    else:
+        return redirect('login')
+
+
     return render(request, 'usuarios/login.html', {'form': form})
 
+'''
+1 - verificamos a validação do formulário;
+2 - verificamos se as senhas são iguais;
+3 - inserimos as informações recebidas no formulário nas variáveis nome, email e senha, para tornar esses dados mais maleáveis na lógica;
+4 - verificamos se a informação de nome corresponde a algo já existente no banco de dados;
+5 - criamos esse novo usuário com as informações inseridas no formulário.
+'''
 def cadastro(request):
     form = CadastroForms()
 
