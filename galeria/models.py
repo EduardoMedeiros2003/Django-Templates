@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 #Sempre que adicionar um novo model, tem que usar o comando 'python manage.py makemigrations' e depois o comando 'python manage.py migrate' para salvar as auterações no banco de dados 
 
@@ -20,6 +21,13 @@ class Fotografia(models.Model):
     foto = models.ImageField(upload_to='fotos/%y/%m/%d/', blank=True)
     publicado = models.BooleanField(default=False)
     data_fotografia = models.DateTimeField(default=datetime.now, blank=False)
+    usuario = models.ForeignKey(
+        to = User,
+        on_delete= models.SET_NULL,
+        null= True,
+        blank= False,
+        related_name= 'user',
+    )
 
     def __str__(self):
         return self.nome
