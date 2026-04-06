@@ -17,7 +17,7 @@
 </head>
 
 <body>
-   {% include 'galeria/partials/_sidebar.html' %}
+   {% include 'partials/_sidebar.html' %}
             <section class="galeria" style="margin-left: 4em">
                 <form action="{% url 'cadastro' %}" method="POST">
                     {% csrf_token %}
@@ -45,4 +45,4 @@
     </div>
 </body>
 
-{% include 'galeria/partials/_footer.html' %}
+{% include 'partials/_footer.html' %}
